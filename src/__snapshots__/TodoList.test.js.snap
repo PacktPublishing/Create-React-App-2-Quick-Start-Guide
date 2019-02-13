@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoList renders and matches our snapshot 1`] = `
+<div
+  className="TodoList"
+>
+  <div
+    className="NewTodo"
+  >
+    <input
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+      
+    <button
+      onClick={[Function]}
+    >
+      Add
+    </button>
+  </div>
+  <div
+    className="Todo"
+  >
+    Write some code
+    <br />
+    <button
+      className="MarkDone"
+      onClick={[Function]}
+    >
+      Mark as Done
+    </button>
+    <button
+      className="RemoveTodo"
+      onClick={[Function]}
+    >
+      Remove Me
+    </button>
+  </div>
+  <div
+    className="Divider"
+  >
+    <hr />
+  </div>
+  <div
+    className="Todo"
+  >
+    Change the world
+    <br />
+    <button
+      className="MarkDone"
+      onClick={[Function]}
+    >
+      Mark as Done
+    </button>
+    <button
+      className="RemoveTodo"
+      onClick={[Function]}
+    >
+      Remove Me
+    </button>
+  </div>
+  <div
+    className="Divider"
+  >
+    <hr />
+  </div>
+  <div
+    className="Todo"
+  >
+    Take a nap and Eat a cookie
+    <br />
+    <button
+      className="MarkDone"
+      onClick={[Function]}
+    >
+      Mark as Done
+    </button>
+    <button
+      className="RemoveTodo"
+      onClick={[Function]}
+    >
+      Remove Me
+    </button>
+  </div>
+  <div
+    className="Divider"
+  >
+    <hr />
+  </div>
+</div>
+`;

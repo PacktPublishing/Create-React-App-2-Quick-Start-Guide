@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTodo renders and matches our snapshot 1`] = `
+<div
+  className="NewTodo"
+>
+  <input
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+    
+  <button
+    onClick={[Function]}
+  >
+    Add
+  </button>
+</div>
+`;
