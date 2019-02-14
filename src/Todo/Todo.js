@@ -6,8 +6,8 @@ class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      done: false,
-      critical: false
+      done: props.done,
+      critical: props.critical
     };
 
     this.markAsDone = this.markAsDone.bind(this);
@@ -21,7 +21,7 @@ class Todo extends Component {
     this.setState({ done: true });
   }
   removeTodo() {
-    this.props.removeTodo(this.props.description);
+    this.props.removeTodo(this.props.id);
   }
   cssClasses() {
     let classes = [];

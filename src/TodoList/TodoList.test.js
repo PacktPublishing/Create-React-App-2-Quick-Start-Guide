@@ -7,6 +7,12 @@ import TodoList from "./TodoList";
 import NewTodo from "../NewTodo";
 import Todo from "../Todo";
 
+jest.mock("../TodoService", () => ({
+  fetchTodos: jest.fn().mockReturnValue({ status: 200, todos: [] }),
+  createTodo: jest.fn().mockReturnValue({ status: 200, todos: [] }),
+  deleteTodo: jest.fn().mockReturnValue({ status: 200, todos: [] })
+}));
+
 describe(TodoList, () => {
   const component = shallow(<TodoList />);
 
@@ -35,17 +41,19 @@ describe(TodoList, () => {
     expect(component.find(Todo)).toHaveLength(todoCount);
   });
 
-  it("adds another Todo when the addTodo function is called", () => {
+  it("adds another Todo when the addTodo function is called", async () => {
     const before = component.find(Todo).length;
-    component.instance().addTodo("A new item");
+    await component.instance().addTodo("New Item");
+    component.update();
     const after = component.find(Todo).length;
     expect(after).toBeGreaterThan(before);
   });
 
-  it("removes a Todo from the list when the remove todo function is called", () => {
+  it("removes a Todo from the list when the remove Todo function is called", async () => {
     const before = component.find(Todo).length;
     const removeMe = component.state("items")[0];
-    component.instance().removeTodo(removeMe);
+    await component.instance().removeTodo(removeMe.id);
+    component.update();
     const after = component.find(Todo).length;
     expect(after).toBeLessThan(before);
   });

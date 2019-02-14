@@ -9,7 +9,13 @@ describe(Todo, () => {
   const description = "New Todo";
   const mockRemoveTodo = jest.fn();
   const component = shallow(
-    <Todo description={description} removeTodo={mockRemoveTodo} />
+    <Todo
+      description={description}
+      removeTodo={mockRemoveTodo}
+      critical={false}
+      done={false}
+      id={1}
+    />
   );
 
   it("renders without crashing", () => {

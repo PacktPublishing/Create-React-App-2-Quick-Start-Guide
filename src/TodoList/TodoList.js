@@ -5,41 +5,65 @@ import "./TodoList.css";
 import NewTodo from "../NewTodo";
 import Divider from "../Divider";
 
+import { fetchTodos, createTodo, deleteTodo } from "../TodoService";
+
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    const [item1, item2, ...rest] = [
-      "Write some code",
-      "Change the world",
-      "Take a nap",
-      "Eat a cookie"
-    ];
+
     this.state = {
-      items: [item1, item2, rest.join(" and ")]
+      items: [],
+      loaded: false
     };
+
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
   }
-  addTodo(item) {
-    this.setState({ items: [...this.state.items, item] });
+  async componentDidMount() {
+    const { todos } = await fetchTodos();
+    this.setState({ items: todos, loaded: true });
   }
-  removeTodo(removeItem) {
-    const filteredItems = this.state.items.filter(description => {
-      return description !== removeItem;
-    });
-    this.setState({ items: filteredItems });
+  async addTodo(description) {
+    const { status } = await createTodo(description);
+    if (status === 200) {
+      const newItem = {
+        id: this.state.items.length + 1,
+        description: description,
+        done: false,
+        critical: false
+      };
+      this.setState({
+        items: [...this.state.items, newItem]
+      });
+    }
+  }
+  async removeTodo(todoId) {
+    const { status } = await deleteTodo(todoId);
+    if (status === 200) {
+      const filteredItems = this.state.items.filter(todo => {
+        return todo.id !== todoId;
+      });
+      this.setState({ items: filteredItems });
+    }
   }
   renderItems() {
-    return this.state.items.map(description => (
-      <Fragment key={"item-" + description}>
-        <Todo
-          key={description}
-          description={description}
-          removeTodo={this.removeTodo}
-        />
-        <Divider key={"divide-" + description} />
-      </Fragment>
-    ));
+    if (this.state.loaded) {
+      return this.state.items.map(todo => (
+        <Fragment key={"item-" + todo.description}>
+          <Todo
+            id={todo.id}
+            key={todo.id}
+            description={todo.description}
+            removeTodo={this.removeTodo}
+            done={todo.done}
+            critical={todo.critical}
+          />
+          <Divider key={"divide-" + todo.description} />
+        </Fragment>
+      ));
+    } else {
+      return <p>Still Loading...</p>;
+    }
   }
   render() {
     return (
