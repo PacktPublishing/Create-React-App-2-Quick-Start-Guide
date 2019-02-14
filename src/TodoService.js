@@ -7,7 +7,7 @@ const fetchTodos = async () => {
 const createTodo = async description => {
   const res = await fetch("/api/todos", {
     method: "POST",
-    headers: { accept: "application/json" },
+    headers: { accept: "application/json", "content-type": "application/json" },
     body: JSON.stringify({
       description: description,
       critical: false,
@@ -21,7 +21,7 @@ const createTodo = async description => {
 const deleteTodo = async todoId => {
   const res = await fetch(`/api/todos/${todoId}`, {
     method: "DELETE",
-    headers: { accept: "application/json" }
+    headers: { accept: "application/json", "content-type": "application/json" }
   });
   const json = await res.json();
   return { status: res.status, todos: json.todos };
