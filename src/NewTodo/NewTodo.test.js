@@ -26,12 +26,12 @@ describe(NewTodo, () => {
   });
 
   it("contains the form", () => {
-    expect(component.find("input")).toHaveLength(1);
-    expect(component.find("button")).toHaveLength(1);
+    expect(component.find("Input")).toHaveLength(1);
+    expect(component.find("Button")).toHaveLength(1);
   });
 
   it("calls the passed in addTodo function when add button is clicked", () => {
-    component.find("button").simulate("click");
+    component.find("Button").simulate("click");
     expect(mockAddTodo).toBeCalled();
   });
 
@@ -45,7 +45,7 @@ describe(NewTodo, () => {
     const updateKey = "I should be empty";
     component.instance().handleUpdate({ target: { value: updateKey } });
     expect(component.state("item")).toEqual(updateKey);
-    component.find("button").simulate("click");
+    component.find("Button").simulate("click");
     expect(component.state("item")).toHaveLength(0);
   });
 });
