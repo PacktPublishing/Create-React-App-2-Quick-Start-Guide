@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "4",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "node-sass": "^4.11.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
